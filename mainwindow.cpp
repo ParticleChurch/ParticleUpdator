@@ -264,8 +264,16 @@ void Overlay::paintEvent(QPaintEvent* e)
 
 void MainWindow::workerProgress(float p)
 {
-    this->titleLabel->setText(("Updating A4G4... " + std::to_string((int)(p * 100.f + 0.5f)) + "%").c_str());
-    this->progress = p;
+    if (p >= 0)
+    {
+        this->titleLabel->setText(("Updating A4G4... " + std::to_string((int)(p * 100.f + 0.5f)) + "%").c_str());
+        this->progress = p;
+    }
+    else
+    {
+        this->titleLabel->setText("Update failed. Please re-install.");
+        this->progress = 1.f;
+    }
     this->repaint();
 }
 
